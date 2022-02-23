@@ -1,0 +1,227 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add/Edit Reservations</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+	rel="stylesheet" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	rel="stylesheet" />
+	<style type="text/css">
+	
+	.nav-item{
+	background-color: rgb(120, 118, 210);
+	border-radius: 10px;
+	
+	margin: 10px;
+	width: 130px;
+	text-align: center;
+	}
+	.nav-item:hover{
+	background-color: gray;
+	border-radius: 10px;
+	}
+	nav{
+	width: 100%;
+	height: 80px; 
+	position: fixed;
+	top: 0;
+	}
+	.nav-link{
+	font-weight: bold;
+	}
+	.reservationformbody{
+	background-color: gray;
+	margin-bottom: 30px;
+	padding: 20px;
+	border-radius: 5px;
+	}
+	
+	.footer{
+	width:inherit;
+	height:auto;
+	background-color: black;
+	margin-top: 10px;
+	font-size: 20px;
+	color: white;
+	}
+	.fblock1{
+	margin-top:20px;
+	margin-right:20px;
+	margin-left:10px;
+	height: 300px;
+	width: 400px;
+	align-content: center;
+	}
+	.blocke{
+	display: inline-flex;
+	}
+	
+	.icones{
+	margin-left:10px;
+	margin-top:50px;
+	margin-right:5px;
+	list-style:none;
+	display: inline-flex;
+	background: silver;
+	border-radius: 5px;
+	}
+	
+	.icones>li{
+	width: 50px;
+	height:50px;
+	margin: 5px;
+	padding: 15px;
+	}
+	
+	.icones>li:hover {
+	background: white;
+	border-radius: 5px;
+	}
+	.emailpr{
+	color: pink; margin-top: 30px; margin-left: 40px;
+	}
+	.cards{
+	display: flex;
+	background-color: pink;
+	padding: 10px;
+	border-radius: 10px;
+	margin: 10px;
+	}
+	.cards1{
+	border: 2px solid gray;
+	border-radius:10px;
+	height: 250px;
+	width:300px;
+	margin-left: 30px;
+	
+	}
+	.cards2{
+	border: 2px solid gray;
+	border-radius:10px;
+	height: 250px;
+	width:800px;
+	margin-left: 30px;
+	background-color: threedface;
+	}
+	.content{
+	padding: 10px;
+	}
+	</style>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" th:href="@{/reservations-home}">Reservation System</a>
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:classappend="${#request.getRequestURI() == '/reservations-home' ? 'active' : ''}" th:href="@{/reservations-home}" >Home</a></li>
+				<li class="nav-item"><a class="nav-link " th:classappend="${#request.getRequestURI() == '/edit-add-reservation' ? 'active' : ''}" th:href="@{/edit-add-reservation}">Add Reservation</a></li>
+				<li class="nav-item"><a class="nav-link " th:classappend="${#request.getRequestURI() == '/reservations-ui' ? 'active' : ''}" th:href="@{/reservations-ui}">View Reservation</a></li>
+				<li class="nav-item"><a class="nav-link " th:classappend="${#request.getRequestURI() == '/contact-us' ? 'active' : ''}" th:href="@{/contact-us}">About Us</a></li>
+				<li class="nav-item"><a class="nav-link "  th:href="@{/reservations-home}">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	
+		
+		<section class="bodydashboard">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 container justify-content-center card">
+					<h1 class="text-center">About Us</h1>
+					<div class="cards">
+					<div class="card cards1">
+						<img alt="alt"
+							src="https://faadoocoupons.com/images/product/detail/thumb/1569951696flipkart-flight-booking-offers.jpeg"
+							height="250px" width="270px">
+					</div>
+					<div class="cards2">
+						<div class="content">
+							<b>Customer Care Numbers :</b> 0755-6610661, 0755-4090600 (Language: Hindi and English)..<br>
+							<b>For Railway tickets booked through IRCTC General Information</b><br>
+							<b>I-tickets/e-tickets :</b> care@irctc.co.in<br>
+							<b>For Cancellation E-tickets :</b> etickets@irctc.co.in<br>
+							<b>For IRCTC iMudra Prepaid Wallet & Card :</b> imudracare@irctc.co.in <br><br>
+							For IRCTC SBI Card users who do not receive the card within 01 month from the 
+							date of application kindly call on the Railway SBI Card Helpline nos. 
+							at 0124-39021212 or 18001801295 (if calling from BSNL/MTNL line) or send email to 
+							<i><b>customercare@sbicard.com</b> </i>. For other queries on your IRCTC SBI card account, kindly email 
+							at <i><b>loyaltyprogram@irctc.co.in</b></i><br>
+					
+					</div>
+						
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	<footer class="footer">
+		<div class="blocke">
+			<div class="fblock1">
+				<h3>Reservation System</h3>
+				<br>
+				<ul class="nav navbar-nav">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">AboutUs</a></li>
+					<li><a href="#">Register</a></li>
+					<li><a href="#">Login</a></li>
+
+				</ul>
+			</div>
+			<div class="fblock1">
+			@copy 2022 Online Reservation System<br>
+			Developed By Vasanthakumar<br>
+					<ul class="icones">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+    					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+    					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+    					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+   	 					<li><a href="#"><i class="fa fa-skype"></i></a></li>
+					</ul>
+			
+			</div>
+			<div class="fblock1">
+
+				<form action="#" method="post" style="width: 300px">
+					<h1>
+						<b>Contact Us</b>
+					</h1>
+					<div class="form-group">
+						<label for="email1">Email address</label> <input type="email"
+							class="form-control" id="email1" name="email" placeholder="Email" />
+					</div>
+					<div class="form-group">
+						<label for="note">Note:</label> <input type="password"
+							class="form-control" id="note" name="note"
+							placeholder="Note text" />
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+	</footer>
+	
+
+</body>
+</html>

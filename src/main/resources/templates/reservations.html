@@ -1,0 +1,211 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reservations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+	
+	<style type="text/css">
+	.nav-item{
+	background-color: rgb(120, 118, 210);
+	border-radius: 10px;
+	margin: 10px;
+	width: 130px;
+	text-align: center;
+	}
+	.nav-item:hover{
+	background-color: gray;
+	border-radius: 10px;
+
+	}
+	.nav-link{
+	font-weight: bold;
+	}
+	.footer{
+	width:inherit;
+	height:auto;
+	background-color: black;
+	margin-top: 10px;
+	font-size: 20px;
+	color: white;
+	}
+	.fblock1{
+	margin-top:20px;
+	margin-right:20px;
+	margin-left:10px;
+	height: 300px;
+	width: 400px;
+	align-content: center;
+	}
+	.blocke{
+	display: inline-flex;
+	}
+	
+	.icones{
+	margin-left:10px;
+	margin-top:50px;
+	margin-right:5px;
+	list-style:none;
+	display: inline-flex;
+	background: silver;
+	border-radius: 5px;
+	}
+	
+	.icones>li{
+	width: 50px;
+	height:50px;
+	margin: 5px;
+	padding: 15px;
+	}
+	
+	.icones>li:hover {
+	background: white;
+	border-radius: 5px;
+	}
+	.emailpr{
+	color: pink; margin-top: 30px; margin-left: 40px;
+	}
+	
+	</style>
+	
+
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" th:href="@{/reservations-home}">Reservation System</a>
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:classappend="${#request.getRequestURI() == '/reservations-home' ? 'active' : ''}" th:href="@{/reservations-home}" >Home</a></li>
+				<li class="nav-item"><a class="nav-link " th:classappend="${#request.getRequestURI() == '/edit-add-reservation' ? 'active' : ''}" th:href="@{/edit-add-reservation}">Add Reservation</a></li>
+				<li class="nav-item"><a class="nav-link " th:classappend="${#request.getRequestURI() == '/reservations-ui' ? 'active' : ''}" th:href="@{/reservations-ui}">View Reservation</a></li>
+				<li class="nav-item"><a class="nav-link " th:classappend="${#request.getRequestURI() == '/contact-us' ? 'active' : ''}" th:href="@{/contact-us}">About Us</a></li>
+				<li class="nav-item"><a class="nav-link "  th:href="@{/reservations-home}">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>View Reservations </h1>
+        </div>
+        	<form th:action="@{/search}" method="get">
+        	<div class="col-md-6">
+  				<input type="text" name="keyword" th:value="${keyword}" class="form-control"  placeholder="Search Here"  size="50">
+  			</div>
+  			<div class="col-md-4">
+  				<button type="submit" class="btn btn-info" >Search</button>
+  			</div>	
+ 			</form>
+        
+        
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <tr>
+                	<th>ID</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Mobile</th>
+                    <th>Date</th>
+                    <th>Email</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${reservations.empty}">
+                    <td colspan="2"> No Reservations Available</td>
+                </tr>
+                <tr th:each="reservation : ${reservations}">
+                    <td><span th:text="${reservation.id}"> Id </span></td>
+                    <td><span th:text="${reservation.firstName}"> FirstName </span></td>
+                    <td><span th:text="${reservation.lastName}"> LastName </span></td>
+                    <td><span th:text="${reservation.mobile}"> Mobile </span></td>
+                    <td><span th:text="${#temporals.format(reservation.date, 'yyyy-MM-dd : hh:mm a')}"> Date </span></td>
+                    
+                    <td><span th:text="${reservation.emailId}"> EmailId </span></td>
+                    <td><span th:text="${reservation.state}"> State </span></td>
+                    <td><span th:text="${reservation.city}"> City </span></td>
+                   
+                    <td>
+                        <a th:href="@{/delete-reservation/{id}(id=${reservation.id})}">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                        <a th:href="@{/edit-add-reservation/{id}(id=${reservation.id})}">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+		<div class="blocke">
+			<div class="fblock1">
+				<h3>Reservation System</h3><br>
+				<ul class="nav navbar-nav">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">AboutUs</a></li>
+					<li><a href="#">Register</a></li>
+					<li><a href="#">Login</a></li>
+				</ul>
+			</div>
+			<div class="fblock1">
+			@copy 2022 Online Reservation System<br>
+			Developed By Vasanthakumar<br>
+					<ul class="icones">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+    					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+    					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+    					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+   	 					<li><a href="#"><i class="fa fa-skype"></i></a></li>
+					</ul>
+			</div>
+			<div class="fblock1">
+				<form action="#" method="post" style="width: 300px">
+					<h1>
+						<b>Contact Us</b>
+					</h1>
+					<div class="form-group">
+						<label for="email1">Email address</label> <input type="email"
+							class="form-control" id="email1" name="email" placeholder="Email" />
+					</div>
+					<div class="form-group">
+						<label for="note">Note:</label> <input type="password"
+							class="form-control" id="note" name="note"
+							placeholder="Note text" />
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+	</footer>
+	
+
+
+</body>
+</html>
